@@ -20,16 +20,28 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create();
 
-    // ========================== AUTOSHOPS ==========================
-    // foreach (range(1, 10) as $_) {
-    //     DB::table('autoshops')->insert([
-    //         'name' => $faker->company,
-    //         'address' => $faker->address,
-    //         'phone_nr' => $faker->phoneNumber,
-    //     ]);
-    // }
+    // ========================== Country ==========================
+    foreach (range(1, 10) as $_) {
+        DB::table('countries')->insert([
+            'name' => $faker->country,
+            's_time' => $faker->date,
+        ]);
+    }
 
+    // ========================== Hotel ==========================
+    foreach (range(1, 10) as $_) {
+        $hotels = ['Radisson Blue', 'Clarion', 'Grand Budapest', 'Old Town Hotel', 'Central Hotel', 'Scandic Hotel', 'Park Hotel', 'Grand Tower Hotel', 'Parken Inn'];
 
+        $photopath = 'http://localhost/bandom/public/images/hotels';
+
+        DB::table('hotels')->insert([
+            'name' => $hotels[rand(0, count($hotels) - 1)],
+            'price' => rand(100, 500),
+            'photo' => $photopath . rand(1,9) . '.jpg',
+            'trip_time' => rand(1, 10),
+            'country_id' => rand(1, 10),
+        ]);
+    }
 
     // ========================== USERS ==========================
       DB::table('users')->insert([
