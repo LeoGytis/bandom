@@ -15,7 +15,30 @@
                         </div>
                         @if (Auth::user()->role > 9)
                         <div class="list-buttons">
-                            <a class="btn btn-outline-success" href="{{route('orders-approve', $order)}}">Approve</a><br>
+                            {{-- <form class="delete form" action="{{route('orders-status', $order)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>What status?</label>
+                                                <select class="form-control" name="status">
+                                                    @foreach($statuses as $key => $status)
+                                                    <option value="{{$key}}" @if($key==$order->status) selected @endif>{{$status}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="submit" class="btn btn-outline-info m-4">Set status</button>
+                                        </div>
+                                        <div class="col-3">
+                                            <a class="btn btn-outline-success m-4" href="{{route('orders-pdf', $order)}}">Get PDF</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> --}}
                             <form method="POST" action="{{route('orders-destroy', $order)}}">
                                 @csrf
                                 <button class="btn btn-outline-secondary ms-3" type="submit">DELETE</button>

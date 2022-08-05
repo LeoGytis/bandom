@@ -58,9 +58,9 @@ Route::prefix('orders')->name('orders-')->group(function () {
     Route::get('show', [O::class, 'showMyOrders'])->name('show')->middleware('rp:admin');
     Route::post('delete/{order}', [O::class, 'destroy'])->name('destroy')->middleware('rp:admin');
     Route::post('approve/{order}', [O::class, 'approve'])->name('approve')->middleware('rp:admin');
+    Route::put('status/{order}', [O::class, 'setStatus'])->name('status')->middleware('rp:admin');
 
 
     // Route::get('', [O::class, 'index'])->name('index');
-    // Route::put('status/{order}', [O::class, 'setStatus'])->name('status');
     // Route::get('/pdf/{order}', [O::class, 'getPdf'])->name('pdf');
 });

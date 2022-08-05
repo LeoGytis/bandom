@@ -12,14 +12,14 @@ class OrderController extends Controller
     {
         $orders = Order::orderBy('id', 'desc')->get();
 
-        return view('orders.index', ['orders' => $orders,]);
+        return view('orders.index', ['orders' => $orders, 'statuses' => Order::STATUSES ]);
     }
 
     public function add(Request $request)
     {
         $order = new Order;
 
-        $order->count = $request->orders_count;
+        $order->count = $request->hotels_count;
         $order->hotel_id = $request->hotel_id;
         $order->user_id = Auth::user()->id;
 
@@ -40,12 +40,10 @@ class OrderController extends Controller
         return redirect()->route('orders-show')->with('pop_message', 'Successfully deleted!');
     }
 
-    public function approve(Order $order)
+    public function setStatus(Request $request, Order $order)
     {
-        $order = new order;
-        $order->name = $request->order_name;
-        $order->s_time = $request->order_s_time;
+        $order->status = $request->status;
         $order->save();
-        return redirect()->route('order.index')->with('pop_message', 'Successfully created!');
+        return redirect()->back();
     }
 }
