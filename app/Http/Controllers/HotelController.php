@@ -7,7 +7,7 @@ use App\Models\Hotel;
 // use App\Http\Requests\UpdateHotelRequest;
 use Illuminate\Http\Request;
 use App\Models\Country;
-
+use Validator;
 
 class HotelController extends Controller
 {
@@ -16,10 +16,18 @@ class HotelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hotels = Hotel::all();
-        return view('hotel.index', ['hotels' => $hotels]);
+        $hotels = match ($request->sort) {
+            'price-asc' => Hotel::orderBy('price', 'asc')->get(),
+            'price-desc' => Hotel::orderBy('price', 'desc')->get(),
+            default => Hotel::all()
+        };
+        
+        $countries = Country::all();
+        // $hotels = Hotel::all();
+        // $countries = Country::where('id', '=', $countryId)->first();  
+        return view('hotel.index', ['countries' => $countries, 'hotels' => $hotels]);
     }
 
     /**
@@ -41,6 +49,21 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'hotel_name' => ['required', 'min:5', 'max:64'],
+                'hotel_price' => ['required', 'min:5', 'max:64'],
+                'hotel_trip_time' => ['required', 'min:5', 'max:64'],
+            ],
+            
+        );
+        
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+
         $hotel = new Hotel;
         $hotel->name = $request->hotel_name;
         $hotel->price = $request->hotel_price;
@@ -48,7 +71,7 @@ class HotelController extends Controller
         $hotel->photo = $request->hotel_photo;
         $hotel->country_id = $request->country_id;
         $hotel->save();
-        return redirect()->route('hotel.index');
+        return redirect()->route('hotel.index')->with('pop_message', 'Successfully created!');
     }
 
     /**
@@ -89,7 +112,7 @@ class HotelController extends Controller
         $hotel->photo = $request->hotel_photo;
         $hotel->country_id = $request->country_id;
         $hotel->save();
-        return redirect()->route('hotel.index');
+        return redirect()->route('hotel.index')->with('pop_message', 'Successfully edited!');
     }
 
     /**
@@ -101,7 +124,6 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         $hotel->delete();
-        return redirect()->route('hotel.index');
-
+        return redirect()->route('hotel.index')->with('pop_message', 'Successfully deleted!');
     }
 }

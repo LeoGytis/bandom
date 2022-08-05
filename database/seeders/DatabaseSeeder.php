@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
     foreach (range(1, 10) as $_) {
         $hotels = ['Radisson Blue', 'Clarion', 'Grand Budapest', 'Old Town Hotel', 'Central Hotel', 'Scandic Hotel', 'Park Hotel', 'Grand Tower Hotel', 'Parken Inn'];
 
-        $photopath = 'http://localhost/bandom/public/images/hotels';
+        $photopath = 'http://localhost/bandom/public/images/hotels/';
 
         DB::table('hotels')->insert([
             'name' => $hotels[rand(0, count($hotels) - 1)],
@@ -48,14 +48,14 @@ class DatabaseSeeder extends Seeder
         'name' => 'user',
         'email' => 'user@gmail.com',
         'password' => Hash::make('123'),
-        // 'role' => 1,
+        'role' => 1,
     ]);
 
     DB::table('users')->insert([
         'name' => 'admin',
         'email' => 'admin@gmail.com',
         'password' => Hash::make('123'),
-        // 'role' => 10,
+        'role' => 10,
     ]);
 
    

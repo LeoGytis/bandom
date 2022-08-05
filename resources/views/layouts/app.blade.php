@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -50,30 +51,46 @@
                         </li>
                         @endif
                         @else
+                        @if (Auth::user()->role > 9)
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Authors
+                                Orders
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                {{-- <a class="dropdown-item" href="{{ route('author.index') }}"> --}}
-                                    Authors List
+                                <a class="dropdown-item" href="{{ route('orders-show') }}">
+                                    Orders List
                                 </a>
-                                {{-- <a class="dropdown-item" href="{{ route('author.create') }}"> --}}
-                                    New Author
+                            </div>
+                        </li>
+                        @endif
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Countries
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('country.index') }}">
+                                    Countries List
                                 </a>
+                                @if (Auth::user()->role > 9)
+                                <a class="dropdown-item" href="{{ route('country.create') }}">
+                                    New Country
+                                </a>
+                                @endif
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Books
+                                Hotel
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                {{-- <a class="dropdown-item" href="{{ route('book.index') }}"> --}}
-                                    Books List
+                                <a class="dropdown-item" href="{{ route('hotel.index') }}">
+                                    Hotels List
                                 </a>
-                                {{-- <a class="dropdown-item" href="{{ route('book.create') }}"> --}}
-                                    New Book
+                                @if (Auth::user()->role > 9)
+                                <a class="dropdown-item" href="{{ route('hotel.create') }}">
+                                    New Hotel
                                 </a>
+                                @endif
                             </div>
                         </li>
 

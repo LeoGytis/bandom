@@ -12,10 +12,10 @@
                     <div class="list-info mb-3">
                         <div class="info">
                             {{$country->name}}<br>
-                            {{$country->s_time}}<br>
-                            {{-- <a class="more-info-link" href="{{route('country.show', $country->id)}}"
-                                role="button">More info</a> --}}
+                            Season Time Starts: {{$country->s_time}}<br>
+                           
                         </div>
+                        @if (Auth::user()->role > 9)
                         <div class="list-buttons">
                             <a class="btn btn-outline-success" href="{{route('country.edit',$country)}}">EDIT</a><br>
                             <form method="POST" action="{{route('country.destroy', $country)}}">
@@ -23,6 +23,7 @@
                                 <button class="btn btn-outline-secondary ms-3" type="submit">DELETE</button>
                             </form>
                         </div>
+                        @endif
                     </div>
                     @endforeach
                 </div>

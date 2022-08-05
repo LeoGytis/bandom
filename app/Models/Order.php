@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Hotel;
 
-class Hotel extends Model
+
+class Order extends Model
 {
     use HasFactory;
 
-    public function hotelCountry()
+    public function hotel()
     {
-        return $this->belongsTo('App\Models\Country', 'country_id', 'id');
+        return $this->belongsTo(Hotel::class, 'hotel_id', 'id');
     }
 }

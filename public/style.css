@@ -1,0 +1,35 @@
+
+.list-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 1px 0px grey;
+  
+  }
+  
+  .list-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .image-box > img {
+    width: 300px;
+  }
+
+  .order-count {
+    width: 50px;
+  }
+
+  .droppy {
+    display: inline-block;
+  }
+  
+  .drop-pop{
+    display: none
+  }
+   
+  .droppy:hover  .drop-pop{
+    display: inline-block;
+  }
