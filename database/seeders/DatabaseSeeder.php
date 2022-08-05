@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'name' => $hotels[rand(0, count($hotels) - 1)],
             'price' => rand(100, 500),
             'photo' => $photopath . rand(1,9) . '.jpg',
-            'trip_time' => rand(1, 10),
+            'trip_time' => rand(7, 14),
             'country_id' => rand(1, 10),
         ]);
     }

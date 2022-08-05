@@ -6,17 +6,20 @@
             <div class="card">
                 <div class="card-header">Create new autoshop</div>
                 <div class="card-body">
-                    <form class="d-flex flex-column align-items-center" method="POST" action="{{route('autoshop.store')}}">
-                        <div class="col-md-4 ms-3 mb-3">
-                            Name: <input type="text" name="autoshop_name">
-                            Address: <input type="text" name="autoshop_address">
-                            Phone number: <input type="text" name="autoshop_phone_nr">
-                        </div>
+                    <form method="POST" action="{{route('hotel.store')}}">
+                        Name: <input type="text" name="hotel_name">
+                        Price: <input type="text" name="hotel_price">
+                        Trip Time: <input type="text" name="hotel_trip_time">
+                        Photo: <input type="text" name="hotel_photo">
+                        <select name="country_id">
+                            @foreach ($countries as $country)
+                                <option value="{{$country->id}}">{{$country->name}} {{$country->s_time}}</option>
+                            @endforeach
+                     </select>
                         @csrf
-                        <button class="btn btn-outline-success mt-3" type="submit">Create</button>
-                    </form>
+                        <button type="submit">ADD</button>
+                     </form>
                 </div>
-
             </div>
         </div>
     </div>

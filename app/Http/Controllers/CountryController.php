@@ -18,7 +18,6 @@ class CountryController extends Controller
     {
         $countries = Country::all();
         return view('country.index', ['countries' => $countries]);
-
     }
 
     /**

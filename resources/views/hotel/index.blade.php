@@ -6,20 +6,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-color">
-                <div class="card-header header-color">List of Autoshops</div>
+                <div class="card-header header-color">List of Hotels</div>
                 <div class="card-body">
-                    @foreach ($autoshops as $autoshop)
+                    @foreach ($hotels as $hotel)
                     <div class="list-info mb-3">
                         <div class="info">
-                            {{$autoshop->name}}<br>
-                            {{$autoshop->address}}<br>
-                            {{$autoshop->phone_nr}}<br>
-                            <a class="more-info-link" href="{{route('autoshop.show', $autoshop->id)}}"
-                                role="button">More info</a>
+                            {{$hotel->name}}<br>
+                            {{$hotel->price}}<br>
+                            {{$hotel->trip_time}}<br>
+                            {{-- {{$hotel->hotelCountry->name}}  --}}
+
+                            {{-- <a class="more-info-link" href="{{route('hotel.show', $hotel->id)}}"
+                                role="button">More info</a> --}}
                         </div>
                         <div class="list-buttons">
-                            <a class="btn btn-outline-success" href="{{route('autoshop.edit',$autoshop)}}">EDIT</a><br>
-                            <form method="POST" action="{{route('autoshop.destroy', $autoshop)}}">
+                            <a class="btn btn-outline-success" href="{{route('hotel.edit',$hotel)}}">EDIT</a><br>
+                            <form method="POST" action="{{route('hotel.destroy', $hotel)}}">
                                 @csrf
                                 <button class="btn btn-outline-secondary ms-3" type="submit">DELETE</button>
                             </form>
