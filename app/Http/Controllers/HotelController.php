@@ -126,4 +126,21 @@ class HotelController extends Controller
         $hotel->delete();
         return redirect()->route('hotel.index')->with('pop_message', 'Successfully deleted!');
     }
+
+    public function deletePicture(Hotel $hotel) 
+    {
+        $name = pathinfo($hotel->photo, PATHINFO_FILENAME);
+        $ext = pathinfo($hotel->photo, PATHINFO_EXTENSION);
+
+        $path = asset('/images') . '/' . $name . '.' . $ext;
+
+        if(file_exists($path)) {
+            unlink($path);
+        }
+        
+        $hotel->photo = null;
+        $hotel->save();
+
+        return redirect()->back()->with('pop_message', 'hotel have no photo now');
+    }
 }

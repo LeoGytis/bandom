@@ -1,5 +1,5 @@
 2varianto nedabaigti darbeliai
 
-- nuotraukos trynimas ir redagavimas
+- nuotraukos sukurimas ir redagavimas
 - usakymu perziura ir patvirtinimas
-
+- group ir prefix budai

@@ -45,6 +45,7 @@ Route::group(['prefix' => 'countries'], function(){
     Route::post('update/{hotel}', [Hotel::class, 'update'])->name('hotel.update')->middleware('rp:admin');
     Route::post('delete/{hotel}', [Hotel::class, 'destroy'])->name('hotel.destroy')->middleware('rp:admin');
     Route::get('show/{hotel}', [Hotel::class, 'show'])->name('hotel.show')->middleware('rp:user');
+    Route::put('delete-picture/{hotel}', [Hotel::class, 'deletePicture'])->name('hotels.delete-picture')->middleware('rp:admin');
  });
  
 
