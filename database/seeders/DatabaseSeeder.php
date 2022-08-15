@@ -22,9 +22,10 @@ class DatabaseSeeder extends Seeder
 
     // ========================== Country ==========================
     foreach (range(1, 10) as $_) {
+        $s_date = $faker->dateTimeBetween('-30 days', '+240 days');
         DB::table('countries')->insert([
             'name' => $faker->country,
-            's_time' => $faker->date,
+            's_time' => date_format($s_date, 'Y/m/d'),
         ]);
     }
 
