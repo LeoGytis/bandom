@@ -57,7 +57,6 @@ class HotelController extends Controller
                 'hotel_price' => ['required', 'min:5', 'max:64'],
                 'hotel_trip_time' => ['required', 'min:5', 'max:64'],
             ],
-            
         );
         
         if ($validator->fails()) {
@@ -70,26 +69,18 @@ class HotelController extends Controller
         $hotel->price = $request->hotel_price;
         $hotel->trip_time = $request->hotel_trip_time;
         
-        // $hotel->photo = $request->hotel_photo;
+        // ========================== Photo file ==========================
 
         if ($request->file('hotel_photo')) {
 
             $photo = $request->file('hotel_photo');
-
             $ext = $photo->getClientOriginalExtension();  //get extention of the file
-
             $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME); //original file name
 
             $file = $name. '-' . rand(100, 111). '.' . $ext;  //create new name for the file
-
-            // $Image = Image::make($photo)->pixelate(12);
-
-            // $Image->save(public_path().'/images/'.$file);
-
             $photo->move(public_path().'/images', $file); //move file from tmp
 
             $hotel->photo = asset('/images') . '/' . $file; //read file path as url
-
         }
 
 

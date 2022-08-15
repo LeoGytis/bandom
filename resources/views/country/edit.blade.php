@@ -13,6 +13,7 @@
                             Time: <input type="text" name="country_s_time" value="{{$country->s_time}}"><br>
                         </div>
                         @csrf
+                        @method('put')
                         <button class="btn btn-outline-success mt-3 mb-3" type="submit">Save</button>
                     </form>
                 </div>

@@ -31,7 +31,7 @@ Route::group(['prefix' => 'countries'], function(){
     Route::get('create', [Country::class, 'create'])->name('country.create')->middleware('rp:admin');
     Route::post('store', [Country::class, 'store'])->name('country.store')->middleware('rp:admin');
     Route::get('edit/{country}', [Country::class, 'edit'])->name('country.edit')->middleware('rp:admin');
-    Route::post('update/{country}', [Country::class, 'update'])->name('country.update')->middleware('rp:admin');
+    Route::put('update/{country}', [Country::class, 'update'])->name('country.update')->middleware('rp:admin');
     Route::post('delete/{country}', [Country::class, 'destroy'])->name('country.destroy')->middleware('rp:admin');
     Route::get('show/{country}', [Country::class, 'show'])->name('country.show')->middleware('rp:user');
  });
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'countries'], function(){
     Route::get('create', [Hotel::class, 'create'])->name('hotel.create')->middleware('rp:admin');
     Route::post('store', [Hotel::class, 'store'])->name('hotel.store')->middleware('rp:admin');
     Route::get('edit/{hotel}', [Hotel::class, 'edit'])->name('hotel.edit')->middleware('rp:admin');
-    Route::post('update/{hotel}', [Hotel::class, 'update'])->name('hotel.update')->middleware('rp:admin');
+    Route::put('update/{hotel}', [Hotel::class, 'update'])->name('hotel.update')->middleware('rp:admin');
     Route::post('delete/{hotel}', [Hotel::class, 'destroy'])->name('hotel.destroy')->middleware('rp:admin');
     Route::get('show/{hotel}', [Hotel::class, 'show'])->name('hotel.show')->middleware('rp:user');
     Route::put('delete-picture/{hotel}', [Hotel::class, 'deletePicture'])->name('hotels.delete-picture')->middleware('rp:admin');
