@@ -1,5 +1,6 @@
 2varianto nedabaigti darbeliai
 
-- nuotraukos sukurimas ir redagavimas
+- nuotraukos redagavimas
 - usakymu perziura ir patvirtinimas
 - group ir prefix budai
+- netrina kai kuriu viesbuciu

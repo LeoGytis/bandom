@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use Validator;
+use Image;
 
 class HotelController extends Controller
 {
@@ -68,10 +69,33 @@ class HotelController extends Controller
         $hotel->name = $request->hotel_name;
         $hotel->price = $request->hotel_price;
         $hotel->trip_time = $request->hotel_trip_time;
-        $hotel->photo = $request->hotel_photo;
+        
+        // $hotel->photo = $request->hotel_photo;
+
+        if ($request->file('hotel_photo')) {
+
+            $photo = $request->file('hotel_photo');
+
+            $ext = $photo->getClientOriginalExtension();  //get extention of the file
+
+            $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME); //original file name
+
+            $file = $name. '-' . rand(100, 111). '.' . $ext;  //create new name for the file
+
+            // $Image = Image::make($photo)->pixelate(12);
+
+            // $Image->save(public_path().'/images/'.$file);
+
+            $photo->move(public_path().'/images', $file); //move file from tmp
+
+            $hotel->photo = asset('/images') . '/' . $file; //read file path as url
+
+        }
+
+
         $hotel->country_id = $request->country_id;
         $hotel->save();
-        return redirect()->route('hotel.index')->with('pop_message', 'Successfully created!');
+        return redirect()->route('hotel.index')->with('pop_message', 'Successfully Created!');
     }
 
     /**
