@@ -1,7 +1,5 @@
 2varianto nedabaigti darbeliai
 
-
-- ar orderis patvirtintas admino
 - filtras
 - paieska
 

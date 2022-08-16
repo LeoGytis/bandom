@@ -10,9 +10,14 @@
                     @foreach ($orders as $order)
                     <div class="d-flex flex-row justify-content-between grey-line mb-3">
                         <div>
-                            <div>
+                            <div class="mb-3">
                                 <b>Order for: {{$order->client->name}}</b><br>
-                                {{$order->count}}x {{$order->hotel->name}}<br><br>
+                                {{$order->count}}x {{$order->hotel->name}}<br>
+                                @if( $order->status == 3) 
+                                    <div class="btn btn-success disabled">
+                                        Approved
+                                    </div>
+                                @endif
                             </div>
                             @if (Auth::user()->role > 9)
                             <form method="POST" action="{{route('order.destroy', $order)}}">
