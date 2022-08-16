@@ -13,4 +13,9 @@ class Hotel extends Model
     {
         return $this->belongsTo('App\Models\Country', 'country_id', 'id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'hotel_id', 'id');
+    }
 }

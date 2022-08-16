@@ -12,6 +12,12 @@ class Order extends Model
 {
     use HasFactory;
 
+    const STATUSES = [
+        1 => 'Pending',
+        2 => 'Canceled',
+        3 => 'Approved'
+    ];
+
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'hotel_id', 'id');
@@ -22,10 +28,5 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    const STATUSES = [
-        1 => 'Not approved',
-        2 => 'Canceled',
-        3 => 'Pending',
-        4 => 'Approved'
-    ];
+    
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountryController as Country;
 use App\Http\Controllers\HotelController as Hotel;
-use App\Http\Controllers\OrderController as O;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -37,31 +37,30 @@ Route::group(['prefix' => 'countries'], function(){
  });
  
 // ========================== Hotel ==========================
- Route::group(['prefix' => 'hotels'], function(){
-    Route::get('', [Hotel::class, 'index'])->name('hotel.index')->middleware('rp:user');
-    Route::get('create', [Hotel::class, 'create'])->name('hotel.create')->middleware('rp:admin');
-    Route::post('store', [Hotel::class, 'store'])->name('hotel.store')->middleware('rp:admin');
-    Route::get('edit/{hotel}', [Hotel::class, 'edit'])->name('hotel.edit')->middleware('rp:admin');
-    Route::put('update/{hotel}', [Hotel::class, 'update'])->name('hotel.update')->middleware('rp:admin');
-    Route::post('delete/{hotel}', [Hotel::class, 'destroy'])->name('hotel.destroy')->middleware('rp:admin');
-    Route::get('show/{hotel}', [Hotel::class, 'show'])->name('hotel.show')->middleware('rp:user');
-    Route::put('delete-picture/{hotel}', [Hotel::class, 'deletePicture'])->name('hotels.delete-picture')->middleware('rp:admin');
+ Route::prefix('hotels')->controller(Hotel::class)->group(function(){
+    Route::get('', 'index')->name('hotel.index')->middleware('rp:user');
+    Route::get('create', 'create')->name('hotel.create')->middleware('rp:admin');
+    Route::post('store', 'store')->name('hotel.store')->middleware('rp:admin');
+    Route::get('edit/{hotel}', 'edit')->name('hotel.edit')->middleware('rp:admin');
+    Route::put('update/{hotel}', 'update')->name('hotel.update')->middleware('rp:admin');
+    Route::post('delete/{hotel}', 'destroy')->name('hotel.destroy')->middleware('rp:admin');
+    Route::get('show/{hotel}', 'show')->name('hotel.show')->middleware('rp:user');
+    Route::put('delete-picture/{hotel}', 'deletePicture')->name('hotels.delete-picture')->middleware('rp:admin');
  });
  
 
  // ========================== Order ==========================
 
-// Route::post('add-service-to-order', [O::class, 'add'])->name('front-add');
-// Route::get('my-orders', [O::class, 'showMyOrders'])->name('my-orders');
+    // Route::post('add-service-to-order', [O::class, 'add'])->name('front-add');
+    // Route::get('my-orders', [O::class, 'showMyOrders'])->name('my-orders');
 
-Route::prefix('orders')->name('orders-')->group(function () {
-    Route::post('add', [O::class, 'add'])->name('add')->middleware('rp:admin');
-    Route::get('show', [O::class, 'showMyOrders'])->name('show')->middleware('rp:admin');
-    Route::post('delete/{order}', [O::class, 'destroy'])->name('destroy')->middleware('rp:admin');
-    Route::post('approve/{order}', [O::class, 'approve'])->name('approve')->middleware('rp:admin');
-    Route::put('status/{order}', [O::class, 'setStatus'])->name('status')->middleware('rp:admin');
+    // Route::post('approve/{order}','approve')->name('approve')->middleware('rp:admin');
 
+    Route::prefix('orders')->controller(OrderController::class)->name('order.')->group(function () {
+        Route::get('', 'index')->name('index')->middleware('rp:admin');
+        Route::post('add', 'add')->name('add');
+        Route::post('delete/{order}', 'destroy')->name('destroy')->middleware('rp:admin');
+        Route::put('status/{order}', 'setStatus')->name('status')->middleware('rp:admin');
+        Route::get('show','showMyOrders')->name('show');
 
-    // Route::get('', [O::class, 'index'])->name('index');
-    // Route::get('/pdf/{order}', [O::class, 'getPdf'])->name('pdf');
-});
+    });

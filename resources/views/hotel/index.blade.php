@@ -34,7 +34,7 @@
                                 Country: {{$hotel->hotelCountry->name}} <br>
                             </div>
                             <div class="mt-3">
-                                <form method="post" action="{{route('orders-add')}}">
+                                <form method="post" action="{{route('order.add')}}">
                                     @csrf
                                     @method('post')
                                     <input class="order-count" type="number" name="hotels_count">

@@ -11,8 +11,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = Order::orderBy('id', 'desc')->get();
-
-        return view('orders.index', ['orders' => $orders, 'statuses' => Order::STATUSES ]);
+        return view('order.index', ['orders' => $orders, 'statuses' => Order::STATUSES ]);
     }
 
     public function add(Request $request)
@@ -22,28 +21,27 @@ class OrderController extends Controller
         $order->count = $request->hotels_count;
         $order->hotel_id = $request->hotel_id;
         $order->user_id = Auth::user()->id;
-
         $order->save();
 
-        return redirect()->route('orders-show');
+        return redirect()->route('order.show');
     }
 
     public function showMyOrders()
     {
         $orders = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
-        return view('order.index', ['orders' => $orders]);
+        return view('order.index', ['orders' => $orders, 'statuses' => Order::STATUSES]);
     }
 
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->route('orders-show')->with('pop_message', 'Successfully deleted!');
+        return redirect()->route('order.show')->with('pop_message', 'Successfully deleted!');
     }
 
     public function setStatus(Request $request, Order $order)
     {
         $order->status = $request->status;
         $order->save();
-        return redirect()->back();
+        return redirect()->back()->with('pop_message', 'Order status has been changed.');
     }
 }

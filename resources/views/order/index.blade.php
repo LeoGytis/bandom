@@ -8,40 +8,33 @@
                 <div class="card-header">List of Orders</div>
                 <div class="card-body">
                     @foreach ($orders as $order)
-                    <div class="list-info d-flex justify-content-between">
-                        <div class="info i-block"><br>
-                            <b>Order for: </b><br>
-                            {{$order->count}}x {{$order->hotel->name}}<br><br>
+                    <div class="d-flex flex-row justify-content-between grey-line mb-3">
+                        <div>
+                            <div>
+                                <b>Order for: {{$order->client->name}}</b><br>
+                                {{$order->count}}x {{$order->hotel->name}}<br><br>
+                            </div>
+                            @if (Auth::user()->role > 9)
+                            <form method="POST" action="{{route('order.destroy', $order)}}">
+                                @csrf
+                                <button class="btn btn-outline-dark mt-3 mb-1" type="submit">Delete Order</button>
+                            </form>
+                            @endif
                         </div>
                         @if (Auth::user()->role > 9)
-                        <div class="list-buttons">
-                            {{-- <form class="delete form" action="{{route('orders-status', $order)}}" method="post">
+                        <div>
+                            <form class="d-flex flex-row justify-content-end mb-2" action="{{route('order.status', $order)}}" method="post">
+                                <div>
+                                    <label>Status:</label>
+                                    <select class="form-select" name="status">
+                                        @foreach($statuses as $key => $status)
+                                        <option value="{{$key}}" @if($key==$order->status) selected @endif>{{$status}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 @csrf
                                 @method('put')
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label>What status?</label>
-                                                <select class="form-control" name="status">
-                                                    @foreach($statuses as $key => $status)
-                                                    <option value="{{$key}}" @if($key==$order->status) selected @endif>{{$status}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <button type="submit" class="btn btn-outline-info m-4">Set status</button>
-                                        </div>
-                                        <div class="col-3">
-                                            <a class="btn btn-outline-success m-4" href="{{route('orders-pdf', $order)}}">Get PDF</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form> --}}
-                            <form method="POST" action="{{route('orders-destroy', $order)}}">
-                                @csrf
-                                <button class="btn btn-outline-secondary ms-3" type="submit">DELETE</button>
+                                <button type="submit" class="btn btn-success m-4">Set status</button>
                             </form>
                         </div>
                         @endif
