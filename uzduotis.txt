@@ -1,6 +1,7 @@
 2varianto nedabaigti darbeliai
 
-- usakymu perziura ir patvirtinimas
+
+- ar orderis patvirtintas admino
 - filtras
 - paieska
 

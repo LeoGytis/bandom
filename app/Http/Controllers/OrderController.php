@@ -35,7 +35,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->route('order.show')->with('pop_message', 'Successfully deleted!');
+        return redirect()->route('order.index')->with('pop_message', 'Successfully deleted!');
     }
 
     public function setStatus(Request $request, Order $order)
