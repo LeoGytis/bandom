@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use Validator;
 use Image;
+use DB;
 
 class HotelController extends Controller
 {
@@ -25,10 +26,16 @@ class HotelController extends Controller
             default => Hotel::all()
         };
 
+        if ($request->country_id) {
+            $hotels = Hotel::where('country_id', $request->country_id)->get();
+            // $hotels = DB::table('hotels')->where('country_id', $request->country_id)->get();
+        }
+
         $countries = Country::all();
+        $filter = (int) $request->country_id;
         // $hotels = Hotel::all();
         // $countries = Country::where('id', '=', $countryId)->first();  
-        return view('hotel.index', ['countries' => $countries, 'hotels' => $hotels]);
+        return view('hotel.index', ['countries' => $countries, 'hotels' => $hotels, 'filter' => $filter,]);
     }
 
     /**

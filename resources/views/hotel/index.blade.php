@@ -17,6 +17,18 @@
                             <a class="btn btn-secondary btn-sm" href="{{route('hotel.index', ['sort' => 'price-desc'])}}" role="button">Price 99-0</a>
                         </div>
                     </div>
+                    <form class="d-flex flex-row justify-content-start mb-2" action="{{route('hotel.index')}}" method="get">
+                        <div class="col-4 mb-3">
+                            <label>Filter by country:</label>
+                            <select class="form-select" name="country_id">
+                                <option value="0" @if($filter==0) selected @endif>No filter</option>
+                                @foreach($countries as $country)
+                                <option value="{{$country->id}}" @if($filter==$country->id) selected @endif>{{$country->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success m-4">Filter</button>
+                    </form>
                     @foreach ($hotels as $hotel)
                     <div class="d-flex justify-content-start grey-line mb-3">
 
